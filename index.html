@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Евгений Онегин</title>
+<meta name="description" content="Евгений Онегин — А. С. Пушкин / Eugene Onegin — A. S. Pushkin">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✒️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E8EDF2; --paper:#F7F9FB; --ink:#17233B; --mute:#55657D; --line:#C5CFDB; --seal:#9B2D3A;
+  --ra:#9B2D3A; --rb:#2F5D8A; --rc:#5E7F3E; --rd:#A67C2E; --re:#6B4E9B; --rf:#2E7F7A; --rg:#7A6A5A;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0F1626; --paper:#162036; --ink:#E4E9F1; --mute:#9AA8BF; --line:#2A3752; --seal:#E58A94;
+    --ra:#E58A94; --rb:#7FB0E0; --rc:#9CC27A; --rd:#D9B56A; --re:#B49AE0; --rf:#6FC7C0; --rg:#B8A898;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.7 "PT Serif",Georgia,"Times New Roman",serif}
+.top{display:flex;justify-content:flex-end;gap:.25rem;padding:1rem 1.25rem 0;max-width:1080px;margin:0 auto}
+.top button{font:inherit;font-size:.95rem;background:none;border:0;border-bottom:2px solid transparent;color:var(--mute);padding:.3rem .6rem;cursor:pointer}
+.top button[aria-pressed="true"]{color:var(--ink);border-color:var(--seal)}
+.top button:focus-visible,.ln:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+.hero{display:grid;gap:2.5rem;max-width:1080px;margin:0 auto;padding:2rem 1.25rem 3.5rem}
+@media(min-width:860px){.hero{grid-template-columns:1.1fr .9fr;align-items:center;padding-top:3.5rem}}
+h1{font-size:clamp(2.7rem,8vw,5rem);line-height:1.02;margin:0 0 1rem;font-weight:700;letter-spacing:-.015em}
+.sub{margin:0;color:var(--mute);font-style:italic;font-size:1.15rem}
+.sub b{display:block;font-style:normal;color:var(--ink);font-weight:400;margin-bottom:.2rem}
+.stanza{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:1.25rem 1.25rem 1rem}
+.lines{display:grid;gap:.35rem}
+.ln{display:flex;align-items:center;gap:.75rem;background:none;border:0;padding:.1rem 0;cursor:pointer;color:inherit;font:inherit;text-align:left;transition:opacity .2s}
+.ln .l{width:1.2rem;font-weight:700;color:var(--c)}
+.ln i{display:block;height:.7rem;border-radius:2px;background:var(--c);transform-origin:left;animation:grow .6s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--n)*70ms)}
+.lines.sel .ln{opacity:.22}
+.lines.sel .ln.on{opacity:1}
+.cap{margin:1rem 0 0;font-size:.9rem;color:var(--mute);line-height:1.55}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+main{max-width:720px;margin:0 auto;padding:0 1.25rem 4rem}
+@media(min-width:860px){main{margin-left:max(1.25rem,calc((100vw - 1080px)/2 + 1.25rem))}}
+section{padding-top:2.5rem;border-top:1px solid var(--line);margin-top:2.5rem}
+h2{font-size:1.7rem;line-height:1.2;margin:0 0 1rem}
+p{margin:0 0 1rem}
+ol.ch{list-style:none;counter-reset:c;padding:0;margin:0}
+ol.ch li{counter-increment:c;position:relative;padding:0 0 1rem 3rem}
+ol.ch li::before{content:counter(c);position:absolute;left:0;top:0;width:2rem;height:2rem;border:1px solid var(--seal);border-radius:50%;display:grid;place-items:center;color:var(--seal);font-size:.9rem;line-height:1}
+dl{margin:0}
+dt{font-weight:700;margin-top:1rem}
+dd{margin:0;color:var(--mute)}
+ul.dates{list-style:none;padding:0;margin:0}
+ul.dates li{display:flex;gap:1.25rem;padding:.35rem 0;border-bottom:1px solid var(--line)}
+ul.dates b{min-width:3.5rem;color:var(--seal)}
+footer{max-width:720px;margin:0 auto;padding:0 1.25rem 3rem;color:var(--mute);font-size:.9rem}
+@media(min-width:860px){footer{margin-left:max(1.25rem,calc((100vw - 1080px)/2 + 1.25rem))}}
+@media(prefers-reduced-motion:reduce){.ln i{animation:none}html{scroll-behavior:auto}}
+
+.top{position:sticky;top:0;z-index:5;max-width:none;padding:.6rem max(1.25rem,calc((100vw - 1080px)/2 + 1.25rem));background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px)}
+.hero{padding-bottom:4.5rem}
+.cta{display:inline-block;margin-top:1.75rem;background:var(--seal);color:var(--bg);padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-weight:700}
+.cta:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.portrait{position:relative;margin:0;justify-self:center;width:min(86%,380px)}
+.portrait::before{content:"";position:absolute;inset:1.2rem -1.2rem -1.2rem 1.2rem;border:2px solid var(--seal);border-radius:999px 999px 14px 14px}
+.portrait img{position:relative;display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%;border-radius:999px 999px 14px 14px;background:#EFE6D2}
+.portrait figcaption{position:relative;margin-top:.6rem;font-size:.85rem;color:var(--mute);font-style:italic}
+.themes{display:grid;gap:1rem}
+.themes article{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.3rem}
+.themes h3{margin:0 0 .35rem;font-size:1.15rem;color:var(--seal)}
+.themes p{margin:0;color:var(--mute)}
+
+.voice-box{max-width:1080px;margin:0 auto;padding:0 1.25rem 1rem}
+.voice-panel{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem}
+.voice-panel p{flex:1 1 100%;margin:0;color:var(--mute);font-size:.95rem}
+.voice-panel button{font:inherit;border:0;border-radius:999px;padding:.65rem 1rem;cursor:pointer;background:var(--seal);color:var(--bg)}
+.voice-panel button.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.voice-status{font-size:.85rem;color:var(--mute);min-width:100%}
+
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Language">
+  <button data-lang="kk" aria-pressed="true">Қазақша</button>
+  <button data-lang="ru" aria-pressed="false">Русский</button>
+  <button data-lang="en" aria-pressed="false">English</button>
+</nav>
+
+<header class="hero">
+  <div>
+    <h1 data-t="title"></h1>
+    <p class="sub"><b data-t="author"></b><span data-t="genre"></span></p>
+    <a class="cta" href="#story" data-t="cta"></a>
+  </div>
+  <figure class="portrait">
+    <img src="onegin.webp" width="915" height="871" alt="" fetchpriority="high">
+    <figcaption data-t="img_cap"></figcaption>
+  </figure>
+</header>
+
+<div class="voice-box">
+  <div class="voice-panel" aria-label="Дыбыстық таныстыру">
+    <strong data-t="voice_h">Дыбыстық таныстыру</strong>
+    <p data-t="voice_text">Сайтқа қош келдіңіз! Бұл жерде шығарма туралы қысқаша таныстыру тыңдай аласыз.</p>
+    <button id="speak" type="button" data-t="listen">▶ Тыңдау</button>
+    <button id="pause" class="secondary" type="button" data-t="pause">Ⅱ Үзіліс</button>
+    <button id="stop" class="secondary" type="button" data-t="stop">■ Тоқтату</button>
+    <span class="voice-status" id="voiceStatus" aria-live="polite"></span>
+  </div>
+</div>
+
+
+<main>
+  <section>
+    <h2 data-t="about_h"></h2>
+    <p data-t="about_1"></p>
+    <p data-t="about_2"></p>
+  </section>
+
+  <section>
+    <h2 data-t="poet_h"></h2>
+    <p data-t="poet_p"></p>
+  </section>
+
+  <section>
+    <h2 data-t="stanza_h"></h2>
+    <div class="stanza">
+      <div class="lines" id="lines" role="group"></div>
+      <p class="cap" data-t="cap"></p>
+    </div>
+  </section>
+
+  <section id="story">
+    <h2 data-t="story_h"></h2>
+    <ol class="ch" id="chapters"></ol>
+  </section>
+
+  <section>
+    <h2 data-t="themes_h"></h2>
+    <div class="themes" id="themes"></div>
+  </section>
+
+  <section>
+    <h2 data-t="chars_h"></h2>
+    <dl id="chars"></dl>
+  </section>
+
+  <section>
+    <h2 data-t="abai_h"></h2>
+    <p data-t="abai_p"></p>
+  </section>
+
+  <section>
+    <h2 data-t="dates_h"></h2>
+    <ul class="dates" id="dates"></ul>
+  </section>
+</main>
+<footer data-t="foot"></footer>
+
+<script>
+const T = {
+kk:{
+  img_cap:"Иллюстрация", cta:"Оқиғаны бастау",
+   voice_h:"Дыбыстық таныстыру", listen:"▶ Тыңдау", pause:"Ⅱ Үзіліс", stop:"■ Тоқтату",
+   voice_text:"Сайтқа қош келдіңіз! Бұл бөлімде Александр Пушкиннің өмірі және «Евгений Онегин» романы туралы қысқаша таныстыру тыңдай аласыз.",
+   narration:"Сәлеметсіз бе! Сіз Александр Сергеевич Пушкиннің «Евгений Онегин» атты өлеңмен жазылған романымен танысасыз. Пушкин бұл шығарманы 1823 жылы бастап, 1830 жылы аяқтады. Роман 1833 жылы толық басылып шықты. Шығармада Евгений Онегин, Татьяна Ларина, Владимир Ленский және Ольга бейнелері арқылы махаббат, достық, жауапкершілік пен өкініш тақырыптары ашылады. Татьяна Онегинге сезімін хат арқылы білдіреді. Ал бірнеше жылдан кейін Онегин Татьянаны қайта кездестіргенде, оның жүрегі өзгереді. Бірақ Татьяна өз таңдауына адал болып қалады. Қазақ оқырмандары бұл шығарманы Абай Құнанбайұлының аудармалары арқылы да жақсы біледі. Енді сайттан романның оқиғасы, кейіпкерлері және негізгі тақырыптары туралы толығырақ біле аласыз.",
+  poet_h:"Автор", poet_p:"Александр Пушкин (1799–1837) — орыс әдебиетінің негізін қалаушы, қазіргі орыс әдеби тілінің қалыптасуына ықпал еткен ақын. Ол 1837 жылы Петербургте дуэльде алған жарақаттан қайтыс болды. Көпшілік романдағы дуэльді ақынның өз тағдырымен салыстырады.",
+  stanza_h:"Онегин шумағы",
+  themes_h:"Басты тақырыптар",
+  themes:[["«Артық адам»","Онегин — орыс әдебиетіндегі «артық адамның» алғашқы үлгісі: ақылды, білімді, бірақ өз күшіне қолданыс таппаған."],["Татьянаның хаты","Татьяна хатты бірінші болып жазады. Пушкин оны француз тілінде жазылған деп көрсетіп, орысшасын өзі береді. Бұл — әдебиеттегі ең танымал махаббат хаттарының бірі."],["Авторлық шегіністер","Пушкин оқиғаны жиі тоқтатып, оқырманмен сөйлеседі: кітап, би, достар туралы айтады. Сондықтан роман жеңіл әрі тірі оқылады."]],
+  title:"Евгений Онегин", author:"Александр Пушкин", genre:"Өлеңмен жазылған роман",
+  cap:"Онегин шумағы — 14 жол, төрт стопалы ямб. Ұйқас схемасы: AbAb CCdd EffE gg. Бас әріп — әйелдік ұйқас (жолы ұзынырақ), кіші әріп — ерлік ұйқас. Жолды басыңыз — ұйқасқан жолдар жарқырайды.",
+  about_h:"Роман туралы",
+  about_1:"«Евгений Онегин» — Александр Пушкиннің өлеңмен жазылған романы. Автор оны 1823 жылы Кишинёвте бастап, 1830 жылы Болдинода аяқтады. Толық басылымы 1833 жылы жарық көрді.",
+  about_2:"Белинский романды «орыс өмірінің энциклопедиясы» деп атады. Мұнда Петербургтің балдары мен ауыл тыныштығы, достық пен махаббат, қателік пен өкініш қатар өріледі.",
+  story_h:"Оқиға",
+  ch:["Петербургтің салқын жүрек дворяны Онегин ағасынан қалған ауыл мүлкін мұра етіп алады.",
+      "Ол көршісі, жас ақын Ленскиймен танысады. Ленский Ольгаға ғашық.",
+      "Ольганың әпкесі Татьяна Онегинге ғашық болып, оған хат жазады.",
+      "Онегин оның сезімін сыйлайды, бірақ отбасылық өмірге дайын емес екенін ашық айтады.",
+      "Татьянаның есім күні тойында Онегин Ольгамен билеп, Ленскийді ашуландырады.",
+      "Екі дос дуэльге шығады. Онегин Ленскийді өлтіреді.",
+      "Татьяна Онегиннің бос үйіне барып, оның кітаптарын оқиды. Оны Мәскеуге алып кетеді.",
+      "Бірнеше жылдан соң Онегин Петербургте Татьянаны князь Греминнің әйелі ретінде кездестіреді. Енді ол ғашық болады, бірақ Татьяна адалдығын сақтайды."],
+  chars_h:"Кейіпкерлер",
+  chars:[["Евгений Онегин","Ерте жалыққан, өз сезіміне кеш көз жеткізген петербургтік дворян."],
+         ["Татьяна Ларина","Ойшыл, кітап сүйгіш, шын жүректі қыз. Романның ең күшті бейнесі."],
+         ["Владимир Ленский","Романтик ақын, Онегиннің досы. Дуэльде қаза табады."],
+         ["Ольга Ларина","Татьянаның көңілді сіңлісі, Ленскийдің қалыңдығы."],
+         ["Князь Гремин","Татьянаның күйеуі, Онегиннің ескі таныс."]],
+  abai_h:"Қазақ топырағындағы Онегин",
+  abai_p:"Абай Құнанбайұлы (1845–1904) Татьянаның Онегинге жазған хатын және Онегиннің жауабын қазақ тіліне аударды. Бұл жолдар қазақ поэзиясы мен ән өнерінің бір бөлігіне айналды.",
+  dates_h:"Даталар",
+  dates:[["1823","Кишинёвте жұмыс басталды"],["1830","Болдинода роман аяқталды"],["1833","Толық басылымы шықты"],["1879","Чайковскийдің «Евгений Онегин» операсының алғашқы қойылымы"],["1965","Джон Кранконың «Онегин» балеті (Штутгарт)"],["1999","Марта Файнс түсірген «Онегин» фильмі"]],
+  foot:"Қысқаша таныстыру сайты."
+},
+ru:{
+  img_cap:"Иллюстрация", cta:"Начать читать",
+   voice_h:"Аудиознакомство", listen:"▶ Слушать", pause:"Ⅱ Пауза", stop:"■ Остановить",
+   voice_text:"Добро пожаловать! Здесь можно прослушать краткое знакомство с Александром Пушкиным и романом «Евгений Онегин».",
+   narration:"Здравствуйте! Вы знакомитесь с романом в стихах Александра Сергеевича Пушкина «Евгений Онегин». Пушкин начал работу над произведением в 1823 году и завершил её в 1830 году. Полное издание вышло в 1833 году. Через образы Евгения Онегина, Татьяны Лариной, Владимира Ленского и Ольги раскрываются темы любви, дружбы, ответственности и сожаления. Татьяна первой признаётся Онегину в своих чувствах в письме. Спустя годы Онегин встречает её снова и понимает, что влюблён, но Татьяна остаётся верна своему выбору. Казахским читателям это произведение также знакомо благодаря переводам Абая Кунанбаева. Теперь вы можете подробнее узнать о сюжете, героях и главных темах романа на этом сайте.",
+  poet_h:"Автор", poet_p:"Александр Пушкин (1799–1837) — основоположник новой русской литературы и литературного языка. Он умер в 1837 году в Петербурге от раны, полученной на дуэли. Многие сравнивают дуэль в романе с судьбой самого поэта.",
+  stanza_h:"Онегинская строфа",
+  themes_h:"Главные темы",
+  themes:[["«Лишний человек»","Онегин — первый «лишний человек» русской литературы: умный, образованный, но не нашедший применения своим силам."],["Письмо Татьяны","Татьяна первой пишет письмо. Пушкин сообщает, что оно было написано по-французски, и даёт русский перевод. Это одно из самых известных любовных писем в литературе."],["Авторские отступления","Пушкин то и дело прерывает рассказ и беседует с читателем: о книгах, танцах, друзьях. Поэтому роман читается легко и живо."]],
+  title:"Евгений Онегин", author:"Александр Пушкин", genre:"Роман в стихах",
+  cap:"Онегинская строфа — 14 строк четырёхстопного ямба. Схема рифмовки: AbAb CCdd EffE gg. Заглавная буква — женская рифма (строка длиннее), строчная — мужская. Нажмите на строку, и рифмующиеся строки подсветятся.",
+  about_h:"О романе",
+  about_1:"«Евгений Онегин» — роман в стихах Александра Пушкина. Автор начал его в 1823 году в Кишинёве и закончил в 1830 году в Болдине. Полное издание вышло в 1833 году.",
+  about_2:"Белинский назвал роман «энциклопедией русской жизни». Здесь рядом петербургские балы и деревенская тишина, дружба и любовь, ошибка и раскаяние.",
+  story_h:"Сюжет",
+  ch:["Петербургский дворянин Онегин, пресытившийся светом, получает в наследство от дяди деревенское имение.",
+      "Он знакомится с соседом, молодым поэтом Ленским. Ленский влюблён в Ольгу.",
+      "Сестра Ольги, Татьяна, влюбляется в Онегина и пишет ему письмо.",
+      "Онегин уважает её чувство, но честно говорит, что не создан для семейной жизни.",
+      "На именинах Татьяны Онегин танцует с Ольгой и злит Ленского.",
+      "Друзья стреляются на дуэли. Онегин убивает Ленского.",
+      "Татьяна приходит в опустевший дом Онегина и читает его книги. Её увозят в Москву.",
+      "Спустя годы Онегин встречает Татьяну в Петербурге женой князя Гремина. Теперь он влюблён, но Татьяна остаётся верна мужу."],
+  chars_h:"Герои",
+  chars:[["Евгений Онегин","Рано разочаровавшийся петербургский дворянин, поздно понявший собственные чувства."],
+         ["Татьяна Ларина","Задумчивая, начитанная, искренняя девушка. Самый сильный образ романа."],
+         ["Владимир Ленский","Поэт-романтик, друг Онегина. Погибает на дуэли."],
+         ["Ольга Ларина","Весёлая сестра Татьяны, невеста Ленского."],
+         ["Князь Гремин","Муж Татьяны, давний знакомый Онегина."]],
+  abai_h:"Онегин на казахской земле",
+  abai_p:"Абай Кунанбаев (1845–1904) перевёл на казахский язык письмо Татьяны к Онегину и ответ Онегина. Эти строки стали частью казахской поэзии и песенной культуры.",
+  dates_h:"Даты",
+  dates:[["1823","Начало работы в Кишинёве"],["1830","Роман закончен в Болдине"],["1833","Вышло полное издание"],["1879","Первая постановка оперы Чайковского «Евгений Онегин»"],["1965","Балет Джона Кранко «Онегин» (Штутгарт)"],["1999","Фильм «Онегин» Марты Файнс"]],
+  foot:"Краткий сайт-знакомство."
+},
+en:{
+  img_cap:"Illustration", cta:"Start reading",
+   voice_h:"Audio introduction", listen:"▶ Listen", pause:"Ⅱ Pause", stop:"■ Stop",
+   voice_text:"Welcome! You can listen to a short introduction to Alexander Pushkin and his novel Eugene Onegin.",
+   narration:"Welcome! You are exploring Eugene Onegin, a novel in verse by Alexander Sergeyevich Pushkin. He began writing it in 1823 and completed it in 1830. The complete edition was published in 1833. Through the characters Eugene Onegin, Tatyana Larina, Vladimir Lensky and Olga, the novel explores love, friendship, responsibility and regret. Tatyana is the first to express her feelings in a letter. Years later, Onegin meets her again and realizes that he loves her, but Tatyana remains faithful to her choice. Kazakh readers also know this work through translations by Abai Kunanbayev. You can now explore the plot, characters and main themes in more detail on this website.",
+  poet_h:"The author", poet_p:"Alexander Pushkin (1799–1837) is regarded as the founder of modern Russian literature and its literary language. He died in St Petersburg in 1837 from a wound received in a duel. Many readers compare the duel in the novel with the poet's own fate.",
+  stanza_h:"The Onegin stanza",
+  themes_h:"Main themes",
+  themes:[["The superfluous man","Onegin is the first \"superfluous man\" of Russian literature: clever and educated, yet unable to find a use for his talents."],["Tatyana's letter","Tatyana is the first to write. Pushkin says the letter was in French and gives a Russian version. It is one of the best-known love letters in literature."],["The author's digressions","Pushkin keeps interrupting the plot to chat with the reader about books, dances and friends. That is why the novel reads so lightly and vividly."]],
+  title:"Eugene Onegin", author:"Alexander Pushkin", genre:"A novel in verse",
+  cap:"The Onegin stanza has 14 lines of iambic tetrameter. Rhyme scheme: AbAb CCdd EffE gg. Capitals are feminine rhymes (longer lines), lowercase are masculine. Tap a line to light up its rhyming partners.",
+  about_h:"About the novel",
+  about_1:"Eugene Onegin is a novel in verse by Alexander Pushkin. He began it in 1823 in Kishinev and finished it in 1830 at Boldino. The complete edition appeared in 1833.",
+  about_2:"The critic Belinsky called it an encyclopedia of Russian life. St Petersburg balls and rural quiet, friendship and love, mistakes and regret all share its pages.",
+  story_h:"The story",
+  ch:["Onegin, a world-weary St Petersburg aristocrat, inherits his uncle's country estate.",
+      "He befriends his neighbor, the young poet Lensky, who is in love with Olga.",
+      "Olga's sister Tatyana falls in love with Onegin and writes him a letter.",
+      "Onegin respects her feelings but tells her plainly that he is not made for family life.",
+      "At Tatyana's name-day party, Onegin dances with Olga and angers Lensky.",
+      "The friends fight a duel. Onegin kills Lensky.",
+      "Tatyana visits Onegin's empty house and reads his books. She is taken to Moscow.",
+      "Years later Onegin meets Tatyana in St Petersburg as Prince Gremin's wife. Now he is in love, but Tatyana stays faithful."],
+  chars_h:"Characters",
+  chars:[["Eugene Onegin","A St Petersburg aristocrat, bored early and slow to understand his own heart."],
+         ["Tatyana Larina","A thoughtful, bookish, sincere young woman. The novel's strongest figure."],
+         ["Vladimir Lensky","A romantic poet and Onegin's friend. He dies in the duel."],
+         ["Olga Larina","Tatyana's cheerful younger sister and Lensky's fiancée."],
+         ["Prince Gremin","Tatyana's husband and an old acquaintance of Onegin."]],
+  abai_h:"Onegin in Kazakh culture",
+  abai_p:"Abai Kunanbayuly (1845–1904) translated Tatyana's letter to Onegin and Onegin's reply into Kazakh. These lines became part of Kazakh poetry and song.",
+  dates_h:"Key dates",
+  dates:[["1823","Work begins in Kishinev"],["1830","Novel completed at Boldino"],["1833","Complete edition published"],["1879","First staging of Tchaikovsky's opera Eugene Onegin"],["1965","John Cranko's ballet Onegin (Stuttgart)"],["1999","Martha Fiennes's film Onegin"]],
+  foot:"A short introduction."
+}};
+
+const SCHEME = "AbAbCCddEffEgg".split("");
+const COLORS = {a:"--ra",b:"--rb",c:"--rc",d:"--rd",e:"--re",f:"--rf",g:"--rg"};
+
+const linesEl = document.getElementById("lines");
+SCHEME.forEach((ch,i)=>{
+  const k = ch.toLowerCase();
+  const b = document.createElement("button");
+  b.className = "ln"; b.type = "button"; b.dataset.r = k;
+  b.setAttribute("aria-pressed","false");
+  b.style.setProperty("--c",`var(${COLORS[k]})`);
+  b.style.setProperty("--n",i);
+  b.innerHTML = `<span class="l">${ch}</span><i style="width:${ch===ch.toUpperCase()?100:90}%"></i>`;
+  b.addEventListener("click",()=>pick(k));
+  linesEl.appendChild(b);
+});
+let current = null;
+function pick(k){
+  current = current===k ? null : k;
+  linesEl.classList.toggle("sel",!!current);
+  linesEl.querySelectorAll(".ln").forEach(el=>{
+    const on = el.dataset.r===current;
+    el.classList.toggle("on",on);
+    el.setAttribute("aria-pressed",on);
+  });
+}
+
+let activeLang = "kk";
+function setLang(l){
+  const t = T[l] || T.kk;
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  activeLang = l;
+  document.getElementById("voiceStatus").textContent = "";
+  document.documentElement.lang = l;
+  document.title = t.title + " — " + t.author;
+  document.querySelectorAll("[data-t]").forEach(el=>{ el.textContent = t[el.dataset.t]; });
+  document.getElementById("chapters").innerHTML = t.ch.map(s=>`<li>${s}</li>`).join("");
+  document.getElementById("themes").innerHTML = t.themes.map(c=>`<article><h3>${c[0]}</h3><p>${c[1]}</p></article>`).join("");
+  document.querySelector(".portrait img").alt = t.img_cap;
+  document.getElementById("chars").innerHTML = t.chars.map(c=>`<dt>${c[0]}</dt><dd>${c[1]}</dd>`).join("");
+  document.getElementById("dates").innerHTML = t.dates.map(d=>`<li><b>${d[0]}</b><span>${d[1]}</span></li>`).join("");
+  document.querySelectorAll(".top button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===l));
+  try{ localStorage.setItem("onegin-lang", l); }catch(e){}
+}
+document.querySelectorAll(".top button").forEach(b=>b.addEventListener("click",()=>setLang(b.dataset.lang)));
+
+let start = "kk";
+try{
+  const saved = localStorage.getItem("onegin-lang");
+  if(saved && T[saved]) start = saved;
+  else { const n = (navigator.language||"").slice(0,2); if(T[n]) start = n; }
+}catch(e){}
+
+setLang(start);
+
+const speakBtn = document.getElementById("speak");
+const pauseBtn = document.getElementById("pause");
+const stopBtn = document.getElementById("stop");
+const voiceStatus = document.getElementById("voiceStatus");
+
+const AUDIO = { kk:"audio/onegin-kk.mp3", ru:"audio/onegin-ru.mp3", en:"audio/onegin-en.mp3" };
+const MSG = {
+  kk:{start:"Таныстыру басталды...", end:"Таныстыру аяқталды.", err:"Дыбыстау іске қосылмады."},
+  ru:{start:"Воспроизведение началось...", end:"Воспроизведение завершено.", err:"Не удалось включить озвучивание."},
+  en:{start:"Introduction started...", end:"Introduction finished.", err:"Speech could not be started."}
+};
+const player = new Audio();
+player.preload = "none";
+
+function stopAll(){
+  player.pause();
+  player.currentTime = 0;
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+}
+// language switch must also stop the sound
+document.querySelectorAll(".top button").forEach(b=>b.addEventListener("click", stopAll));
+
+player.addEventListener("ended", () => { voiceStatus.textContent = MSG[activeLang].end; });
+
+function speakFallback(){
+  if (!("speechSynthesis" in window)) { voiceStatus.textContent = MSG[activeLang].err; return; }
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(T[activeLang].narration);
+  u.lang = activeLang === "kk" ? "kk-KZ" : activeLang === "ru" ? "ru-RU" : "en-US";
+  u.rate = 0.9;
+  u.onstart = () => { voiceStatus.textContent = MSG[activeLang].start; };
+  u.onend = () => { voiceStatus.textContent = MSG[activeLang].end; };
+  u.onerror = () => { voiceStatus.textContent = MSG[activeLang].err; };
+  speechSynthesis.speak(u);
+}
+
+speakBtn.addEventListener("click", () => {
+  stopAll();
+  player.src = AUDIO[activeLang];
+  player.play().then(() => {
+    voiceStatus.textContent = MSG[activeLang].start;
+  }).catch(speakFallback);
+});
+pauseBtn.addEventListener("click", () => {
+  if (player.src && !player.paused) player.pause();
+  else if (player.src && player.paused && player.currentTime > 0 && !player.ended) player.play();
+});
+stopBtn.addEventListener("click", () => { stopAll(); voiceStatus.textContent = ""; });
+</script>
+</body>
+</html>
